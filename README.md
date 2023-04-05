@@ -1,1 +1,1 @@
-## Help "Finger Princess" Mr.GPT !
+## Help "Finger Princess" using GPT
