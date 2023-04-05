@@ -1,26 +1,17 @@
-import Config
+import pandas as pd
 import PdfToTxt
-import openai
+import GptTrain
 
-obj = PdfToTxt.Dataset()
-obj.pdf_to_text()
+data = PdfToTxt.Dataset()
+data.pdf_to_text()
+sample = data.docs["general_sts2013.pdf"][:1000]
+qna = GptTrain.QA()
 
-context = obj.docs["general_sts2013.pdf"][:2000]
-openai.api_key = Config.API_KEY
-response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=f"Write questions based on the text below\n\nText: {context}\n\nQuestions:\n1.",
-        temperature=0,
-        max_tokens=257,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0,
-        stop=["\n\n"]
-     )
+df = pd.DataFrame()
 
-print(response['choices'][0]['text'])
+sample_questions = qna.get_questions(sample)
+print(sample_questions)
 
 
-# df['questions']= df.context.apply(get_questions)
-# df['questions'] = "1." + df.questions
-# print(df[['questions']].values[0][0])
+sample_answers = qna.get_answers(sample, sample_questions)
+print(sample_answers)
