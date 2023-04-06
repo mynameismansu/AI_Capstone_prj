@@ -35,7 +35,7 @@ class QA:
         openai.api_key = self.apikey
         try:
             response = openai.Completion.create(
-                engine="davinci-instruct-beta-v3",
+                engine="text-davinci-003",
                 prompt=f"Write answer based on the text below\n\nText: {context}\n\nQuestions:\n{question}\n\nAnswers:\n1.",
                 temperature=0,
                 max_tokens=257,
