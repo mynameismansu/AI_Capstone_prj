@@ -11,8 +11,12 @@ class QA:
         self.apikey = Config.API_KEY
         self.df = pd.DataFrame()
 
-    # def cut_text(self):
-    #    (too long text has a problem of excessive tokens)
+    def cut_text(self, context):
+     #  (too long text has a problem of excessive tokens)
+        print(len(context))
+        indexs = len(context) / 1000
+        ## dataframe index append text
+
 
     def get_questions(self, context):
         openai.api_key = self.apikey
